@@ -1,0 +1,974 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Gestión de exámenes</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#000;background-color:#337ab7}.action h4.action-heading .method.head{color:#000;background-color:#337ab7}.action h4.action-heading .method.options{color:#000;background-color:#337ab7}.action h4.action-heading .method.put{color:#000;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#000;background-color:#ed9c28}.action h4.action-heading .method.post{color:#000;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#000;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#examen">Examen</a></div><div class="collapse-content"><ul><li><a href="#examen-examen-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#examen-examen-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#examen-examen-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#examen-examen-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#examen-examen-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#tipo-de-pregunta">Tipo de pregunta</a></div><div class="collapse-content"><ul><li><a href="#tipo-de-pregunta-tipo-de-pregunta-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear tipo de pregunta</a></li><li><a href="#tipo-de-pregunta-tipo-de-pregunta-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos los tipos de pregunta</a></li><li><a href="#tipo-de-pregunta-tipo-de-pregunta-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Ver detalle de tipo de pregunta</a></li><li><a href="#tipo-de-pregunta-tipo-de-pregunta-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar tipo de pregunta</a></li><li><a href="#tipo-de-pregunta-tipo-de-pregunta-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar tipo de pregunta</a></li><li><a href="#tipo-de-pregunta-pregunta-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear pregunta</a></li><li><a href="#tipo-de-pregunta-pregunta-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todas las preguntas</a></li><li><a href="#tipo-de-pregunta-pregunta-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Ver detalle de pregunta</a></li><li><a href="#tipo-de-pregunta-pregunta-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar pregunta</a></li><li><a href="#tipo-de-pregunta-pregunta-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar pregunta</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#pregunta-propuesta">Pregunta propuesta</a></div><div class="collapse-content"><ul><li><a href="#pregunta-propuesta-pregunta-propuesta-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear pregunta propuesta</a></li><li><a href="#pregunta-propuesta-pregunta-propuesta-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todas las respuestas propuestas a preguntas</a></li><li><a href="#pregunta-propuesta-pregunta-propuesta-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Ver detalle de respuesta propuesta a pregunta</a></li><li><a href="#pregunta-propuesta-pregunta-propuesta-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar respuesta propuesta</a></li><li><a href="#pregunta-propuesta-pregunta-propuesta-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar respuesta propuesta a pregunta</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#corregir-examen">Corregir Examen</a></div><div class="collapse-content"><ul><li><a href="#corregir-examen-corregir-examen-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#corregir-examen-corregir-examen-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#corregir-examen-corregir-examen-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#corregir-examen-corregir-examen-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#corregir-examen-corregir-examen-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#candidato">Candidato</a></div><div class="collapse-content"><ul><li><a href="#candidato-candidatos-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#candidato-candidatos-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#candidato-candidatos-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#candidato-candidatos-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#candidato-candidatos-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#candidato-asociado-a-examen">Candidato asociado a examen</a></div><div class="collapse-content"><ul><li><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#respuestas-del-candidato">Respuestas del candidato</a></div><div class="collapse-content"><ul><li><a href="#respuestas-del-candidato-resultados-de-usuario-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#respuestas-del-candidato-resultados-de-usuario-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#respuestas-del-candidato-resultados-de-usuario-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#respuestas-del-candidato-resultados-de-usuario-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#respuestas-del-candidato-resultados-de-usuario-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#rol">Rol</a></div><div class="collapse-content"><ul><li><a href="#rol-rol-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#rol-rol-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#rol-rol-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#rol-rol-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#rol-rol-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#compañia">Compañia</a></div><div class="collapse-content"><ul><li><a href="#compañia-compañia-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#compañia-compañia-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#compañia-compañia-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#compañia-compañia-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#compañia-compañia-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#usuario">Usuario</a></div><div class="collapse-content"><ul><li><a href="#usuario-usuario-post"><span class="badge post"><i class="fa fa-plus"></i></span>Crear nuevo</a></li><li><a href="#usuario-usuario-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li><li><a href="#usuario-usuario-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener detalle</a></li><li><a href="#usuario-usuario-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Modificar</a></li><li><a href="#usuario-usuario-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Eliminar</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#rol-por-usuario">Rol por usuario</a></div><div class="collapse-content"><ul><li><a href="#rol-por-usuario-rol-por-usuario-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Obtener todos</a></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#login">Login</a></div><div class="collapse-content"><ul><li><a href="#login-login-usuario-post"><span class="badge post"><i class="fa fa-plus"></i></span>Iniciar sesión</a></li><li><a href="#login-login-candidato-post"><span class="badge post"><i class="fa fa-plus"></i></span>Iniciar sesión</a></li></ul></div></div></nav><div class="content"><header><h1 id="top">Gestión de exámenes</h1></header><p>Documentación para la API MPWAR</p>
+<section id="examen" class="resource-group"><h2 class="group-heading">Examen <a href="#examen" class="permalink">&para;</a></h2><div id="examen-examen" class="resource"><h3 class="resource-heading">Examen <a href="#examen-examen" class="permalink">&nbsp;&para;</a></h3><div id="examen-examen-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#examen-examen-post" class="method post">POST</a><code class="uri">/exams</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/exams</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba MPWAR"</span></span>,
+  "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"instrucciones van aqui"</span></span>,
+  "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">50</span></span>,
+  "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+  "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+  "<span class="hljs-attribute">id_user</span>": <span class="hljs-value"><span class="hljs-number">6</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="examen-examen-1" class="resource"><h3 class="resource-heading">Examen <a href="#examen-examen-1" class="permalink">&nbsp;&para;</a></h3><div id="examen-examen-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#examen-examen-get" class="method get">GET</a><code class="uri">/exams</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/exams</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba MPWAR"</span></span>,
+    "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"instrucciones van aqui"</span></span>,
+    "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">50</span></span>,
+    "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">id_user</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Victor"</span></span>,
+      "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Perez"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"vp@gmail.com"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$HHU.Kp1Rr5UUiRtCdandhOEIouruSqbACfuE267xxsK4uc/MniQxS"</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-10T12:52:45+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-10T17:48:21+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="examen-examen-2" class="resource"><h3 class="resource-heading">Examen <a href="#examen-examen-2" class="permalink">&nbsp;&para;</a></h3><div id="examen-examen-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#examen-examen-get-1" class="method get">GET</a><code class="uri">/exams/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/exams/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba MPWAR"</span></span>,
+  "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"instrucciones van aqui"</span></span>,
+  "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">50</span></span>,
+  "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+  "<span class="hljs-attribute">id_user</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+    "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Victor"</span></span>,
+    "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Perez"</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"vp@gmail.com"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$HHU.Kp1Rr5UUiRtCdandhOEIouruSqbACfuE267xxsK4uc/MniQxS"</span></span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-10T12:52:45+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-10T17:48:21+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="examen-examen-3" class="resource"><h3 class="resource-heading">Examen <a href="#examen-examen-3" class="permalink">&nbsp;&para;</a></h3><div id="examen-examen-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#examen-examen-put" class="method put">PUT</a><code class="uri">/exams/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/exams/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba MPWAR"</span>
+    <span class="hljs-string">"instructions"</span>: <span class="hljs-string">"instrucciones van aqui"</span></span>,
+    "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">50</span></span>,
+    "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+    "<span class="hljs-attribute">id_user</span>": <span class="hljs-value"><span class="hljs-number">6</span>
+  </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="examen-examen-4" class="resource"><h3 class="resource-heading">Examen <a href="#examen-examen-4" class="permalink">&nbsp;&para;</a></h3><div id="examen-examen-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#examen-examen-delete" class="method delete">DELETE</a><code class="uri">/exams/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/exams/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="tipo-de-pregunta" class="resource-group"><h2 class="group-heading">Tipo de pregunta <a href="#tipo-de-pregunta" class="permalink">&para;</a></h2><div id="tipo-de-pregunta-tipo-de-pregunta" class="resource"><h3 class="resource-heading">Tipo de pregunta <a href="#tipo-de-pregunta-tipo-de-pregunta" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-tipo-de-pregunta-post" class="action post"><h4 class="action-heading"><div class="name">Crear tipo de pregunta</div><a href="#tipo-de-pregunta-tipo-de-pregunta-post" class="method post">POST</a><code class="uri">/questiontypes</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/questiontypes</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Descripcion de tipo de pregunta"</span>
+    <span class="hljs-string">"autocorrect"</span>: <span class="hljs-literal">false</span>
+  </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-tipo-de-pregunta-1" class="resource"><h3 class="resource-heading">Tipo de pregunta <a href="#tipo-de-pregunta-tipo-de-pregunta-1" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-tipo-de-pregunta-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos los tipos de pregunta</div><a href="#tipo-de-pregunta-tipo-de-pregunta-get" class="method get">GET</a><code class="uri">/questiontypes</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/questiontypes</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+    "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-tipo-de-pregunta-2" class="resource"><h3 class="resource-heading">Tipo de pregunta <a href="#tipo-de-pregunta-tipo-de-pregunta-2" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-tipo-de-pregunta-get-1" class="action get"><h4 class="action-heading"><div class="name">Ver detalle de tipo de pregunta</div><a href="#tipo-de-pregunta-tipo-de-pregunta-get-1" class="method get">GET</a><code class="uri">/questiontypes/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/questiontypes/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+  "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-tipo-de-pregunta-3" class="resource"><h3 class="resource-heading">Tipo de pregunta <a href="#tipo-de-pregunta-tipo-de-pregunta-3" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-tipo-de-pregunta-put" class="action put"><h4 class="action-heading"><div class="name">Modificar tipo de pregunta</div><a href="#tipo-de-pregunta-tipo-de-pregunta-put" class="method put">PUT</a><code class="uri">/questiontypes/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/questiontypes/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Descripcion de tipo de pregunta"</span>
+    <span class="hljs-string">"autocorrect"</span>: <span class="hljs-literal">true</span>
+  </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-tipo-de-pregunta-4" class="resource"><h3 class="resource-heading">Tipo de pregunta <a href="#tipo-de-pregunta-tipo-de-pregunta-4" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-tipo-de-pregunta-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar tipo de pregunta</div><a href="#tipo-de-pregunta-tipo-de-pregunta-delete" class="method delete">DELETE</a><code class="uri">/questiontypes/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/questiontypes/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-pregunta" class="resource"><h3 class="resource-heading">Pregunta <a href="#tipo-de-pregunta-pregunta" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-pregunta-post" class="action post"><h4 class="action-heading"><div class="name">Crear pregunta</div><a href="#tipo-de-pregunta-pregunta-post" class="method post">POST</a><code class="uri">/questions</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/questions</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">question_number</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">id_type</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test9699"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Descripcion 1"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">20</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-pregunta-1" class="resource"><h3 class="resource-heading">Pregunta <a href="#tipo-de-pregunta-pregunta-1" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-pregunta-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todas las preguntas</div><a href="#tipo-de-pregunta-pregunta-get" class="method get">GET</a><code class="uri">/questions</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/questions</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">54</span></span>,
+    "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+      "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Pregunta 1"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">20</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-15T11:49:17+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-pregunta-2" class="resource"><h3 class="resource-heading">Pregunta <a href="#tipo-de-pregunta-pregunta-2" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-pregunta-get-1" class="action get"><h4 class="action-heading"><div class="name">Ver detalle de pregunta</div><a href="#tipo-de-pregunta-pregunta-get-1" class="method get">GET</a><code class="uri">/questions/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/questions/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">54</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+    "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Pregunta 1"</span></span>,
+  "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">20</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-15T11:49:17+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-pregunta-3" class="resource"><h3 class="resource-heading">Pregunta <a href="#tipo-de-pregunta-pregunta-3" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-pregunta-put" class="action put"><h4 class="action-heading"><div class="name">Modificar pregunta</div><a href="#tipo-de-pregunta-pregunta-put" class="method put">PUT</a><code class="uri">/questions/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/questions/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">54</span></span>,
+    "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+      "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Pregunta 1"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-15T11:49:17+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="tipo-de-pregunta-pregunta-4" class="resource"><h3 class="resource-heading">Pregunta <a href="#tipo-de-pregunta-pregunta-4" class="permalink">&nbsp;&para;</a></h3><div id="tipo-de-pregunta-pregunta-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar pregunta</div><a href="#tipo-de-pregunta-pregunta-delete" class="method delete">DELETE</a><code class="uri">/questions/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/questions/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="pregunta-propuesta" class="resource-group"><h2 class="group-heading">Pregunta propuesta <a href="#pregunta-propuesta" class="permalink">&para;</a></h2><div id="pregunta-propuesta-pregunta-propuesta" class="resource"><h3 class="resource-heading">Pregunta propuesta <a href="#pregunta-propuesta-pregunta-propuesta" class="permalink">&nbsp;&para;</a></h3><div id="pregunta-propuesta-pregunta-propuesta-post" class="action post"><h4 class="action-heading"><div class="name">Crear pregunta propuesta</div><a href="#pregunta-propuesta-pregunta-propuesta-post" class="method post">POST</a><code class="uri">/proposedanswers</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/proposedanswers</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id_question</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+    "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"Respuesta propuesta a pregunta"</span></span>,
+    "<span class="hljs-attribute">is_correct</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">"none"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="pregunta-propuesta-pregunta-propuesta-1" class="resource"><h3 class="resource-heading">Pregunta propuesta <a href="#pregunta-propuesta-pregunta-propuesta-1" class="permalink">&nbsp;&para;</a></h3><div id="pregunta-propuesta-pregunta-propuesta-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todas las respuestas propuestas a preguntas</div><a href="#pregunta-propuesta-pregunta-propuesta-get" class="method get">GET</a><code class="uri">/proposedanswers</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/proposedanswers</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">id_question</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+    "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"Respuesta propuesta a pregunta"</span></span>,
+    "<span class="hljs-attribute">is_correct</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">"none"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="pregunta-propuesta-pregunta-propuesta-2" class="resource"><h3 class="resource-heading">Pregunta propuesta <a href="#pregunta-propuesta-pregunta-propuesta-2" class="permalink">&nbsp;&para;</a></h3><div id="pregunta-propuesta-pregunta-propuesta-get-1" class="action get"><h4 class="action-heading"><div class="name">Ver detalle de respuesta propuesta a pregunta</div><a href="#pregunta-propuesta-pregunta-propuesta-get-1" class="method get">GET</a><code class="uri">/proposedanswers/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/proposedanswers/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">54</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+    "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Pregunta 1"</span></span>,
+  "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">20</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-15T11:49:17+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="pregunta-propuesta-pregunta-propuesta-3" class="resource"><h3 class="resource-heading">Pregunta propuesta <a href="#pregunta-propuesta-pregunta-propuesta-3" class="permalink">&nbsp;&para;</a></h3><div id="pregunta-propuesta-pregunta-propuesta-put" class="action put"><h4 class="action-heading"><div class="name">Modificar respuesta propuesta</div><a href="#pregunta-propuesta-pregunta-propuesta-put" class="method put">PUT</a><code class="uri">/proposedanswers/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/proposedanswers/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">54</span></span>,
+    "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+      "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Pregunta 1"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-15T11:49:17+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="pregunta-propuesta-pregunta-propuesta-4" class="resource"><h3 class="resource-heading">Pregunta propuesta <a href="#pregunta-propuesta-pregunta-propuesta-4" class="permalink">&nbsp;&para;</a></h3><div id="pregunta-propuesta-pregunta-propuesta-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar respuesta propuesta a pregunta</div><a href="#pregunta-propuesta-pregunta-propuesta-delete" class="method delete">DELETE</a><code class="uri">/proposedanswers/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/proposedanswers/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="corregir-examen" class="resource-group"><h2 class="group-heading">Corregir Examen <a href="#corregir-examen" class="permalink">&para;</a></h2><div id="corregir-examen-corregir-examen" class="resource"><h3 class="resource-heading">Corregir examen <a href="#corregir-examen-corregir-examen" class="permalink">&nbsp;&para;</a></h3><div id="corregir-examen-corregir-examen-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#corregir-examen-corregir-examen-post" class="method post">POST</a><code class="uri">/reviewertests</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/reviewertests</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test18707"</span></span>,
+  "<span class="hljs-attribute">id_reviewer</span>": <span class="hljs-value"><span class="hljs-number">5</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="corregir-examen-corregir-examen-1" class="resource"><h3 class="resource-heading">Corregir examen <a href="#corregir-examen-corregir-examen-1" class="permalink">&nbsp;&para;</a></h3><div id="corregir-examen-corregir-examen-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#corregir-examen-corregir-examen-get" class="method get">GET</a><code class="uri">/reviewertests</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/reviewertests</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">raw</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">id_user</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+      "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test3129"</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-27T19:07:13+0200"</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">tests</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test3129"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba"</span></span>,
+      "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"hola"</span></span>,
+      "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+      "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+      "<span class="hljs-attribute">id_user</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+        "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+          "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+          "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+          "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+          "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Postman 22"</span></span>,
+        "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Chrome 22"</span></span>,
+        "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"pchrome22@gmail.com"</span></span>,
+        "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$HHU.Kp1Rr5UUiRtCdandhOEIouruSqbACfuE267xxsK4uc/MniQxS"</span></span>,
+        "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-10T12:52:45+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-24T19:27:32+0200"</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="corregir-examen-corregir-examen-2" class="resource"><h3 class="resource-heading">Corregir Examen <a href="#corregir-examen-corregir-examen-2" class="permalink">&nbsp;&para;</a></h3><div id="corregir-examen-corregir-examen-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#corregir-examen-corregir-examen-get-1" class="method get">GET</a><code class="uri">/reviewertests/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/reviewertests/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">raw</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">id_user</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test3129"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-27T19:07:13+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">tests</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test3129"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba"</span></span>,
+    "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"hola"</span></span>,
+    "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">id_user</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Postman 22"</span></span>,
+      "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Chrome 22"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"pchrome22@gmail.com"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$HHU.Kp1Rr5UUiRtCdandhOEIouruSqbACfuE267xxsK4uc/MniQxS"</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-10T12:52:45+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-24T19:27:32+0200"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="corregir-examen-corregir-examen-3" class="resource"><h3 class="resource-heading">Corregir Examen <a href="#corregir-examen-corregir-examen-3" class="permalink">&nbsp;&para;</a></h3><div id="corregir-examen-corregir-examen-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#corregir-examen-corregir-examen-put" class="method put">PUT</a><code class="uri">/reviewertests/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/reviewertests/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test18707"</span></span>,
+  "<span class="hljs-attribute">id_reviewer</span>": <span class="hljs-value"><span class="hljs-number">5</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="corregir-examen-corregir-examen-4" class="resource"><h3 class="resource-heading">Corregir Examen <a href="#corregir-examen-corregir-examen-4" class="permalink">&nbsp;&para;</a></h3><div id="corregir-examen-corregir-examen-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#corregir-examen-corregir-examen-delete" class="method delete">DELETE</a><code class="uri">/reviewertests/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/reviewertests/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="candidato" class="resource-group"><h2 class="group-heading">Candidato <a href="#candidato" class="permalink">&para;</a></h2><div id="candidato-candidatos" class="resource"><h3 class="resource-heading">Candidatos <a href="#candidato-candidatos" class="permalink">&nbsp;&para;</a></h3><div id="candidato-candidatos-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#candidato-candidatos-post" class="method post">POST</a><code class="uri">/candidates</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidates</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id_user</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test10318"</span></span>,
+  "<span class="hljs-attribute">emails</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"email1@email.com"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"email2@email.com"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"email3@email.com"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"email4@email.com"</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-candidatos-1" class="resource"><h3 class="resource-heading">Candidatos <a href="#candidato-candidatos-1" class="permalink">&nbsp;&para;</a></h3><div id="candidato-candidatos-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#candidato-candidatos-get" class="method get">GET</a><code class="uri">/candidates</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidates</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+    "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-candidatos-2" class="resource"><h3 class="resource-heading">Candidatos <a href="#candidato-candidatos-2" class="permalink">&nbsp;&para;</a></h3><div id="candidato-candidatos-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#candidato-candidatos-get-1" class="method get">GET</a><code class="uri">/candidates/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidates/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+  "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+  "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-candidatos-3" class="resource"><h3 class="resource-heading">Candidatos <a href="#candidato-candidatos-3" class="permalink">&nbsp;&para;</a></h3><div id="candidato-candidatos-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#candidato-candidatos-put" class="method put">PUT</a><code class="uri">/candidates/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidates/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+  "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+  "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-candidatos-4" class="resource"><h3 class="resource-heading">Candidatos <a href="#candidato-candidatos-4" class="permalink">&nbsp;&para;</a></h3><div id="candidato-candidatos-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#candidato-candidatos-delete" class="method delete">DELETE</a><code class="uri">/candidates/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidates/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="candidato-asociado-a-examen" class="resource-group"><h2 class="group-heading">Candidato asociado a examen <a href="#candidato-asociado-a-examen" class="permalink">&para;</a></h2><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen" class="resource"><h3 class="resource-heading">Candidatos asociados a examen <a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen" class="permalink">&nbsp;&para;</a></h3><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-post" class="method post">POST</a><code class="uri">/candidatetests</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidatetests</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test4940"</span></span>,
+  "<span class="hljs-attribute">id_candidate</span>": <span class="hljs-value"><span class="hljs-number">3</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-1" class="resource"><h3 class="resource-heading">Candidatos asociados a examen <a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-1" class="permalink">&nbsp;&para;</a></h3><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-get" class="method get">GET</a><code class="uri">/candidatetests</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidatetests</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">raw</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">43</span></span>,
+      "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test29215"</span></span>,
+      "<span class="hljs-attribute">id_candidate</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+      "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+      "<span class="hljs-attribute">started</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:39:52+0200"</span></span>,
+      "<span class="hljs-attribute">submitted</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:40:10+0200"</span></span>,
+      "<span class="hljs-attribute">is_taken</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">tests</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test29215"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Examen MPWAR"</span></span>,
+      "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"Lea las instrucciones de cada pregunta con cuidado y luego compruebe si las ha entendido correctamente. Cualquier error cometido al marcar su respuesta haran que se le califique como incorrecta."</span></span>,
+      "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">60</span></span>,
+      "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+      "<span class="hljs-attribute">id_user</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">7</span></span>,
+        "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+          "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+          "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+          "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+          "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Andreina "</span></span>,
+        "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Loriente"</span></span>,
+        "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"andreina.loriente@gmail.com"</span></span>,
+        "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$38rTwbIRnvFoROck5RUG8OKhuUDgZ/N9mVE56lTKSyqAhX8Q5Pi4m"</span></span>,
+        "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-29T19:25:20+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T17:24:46+0200"</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">candidates</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+      "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-2" class="resource"><h3 class="resource-heading">Candidatos asociados a examen <a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-2" class="permalink">&nbsp;&para;</a></h3><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-get-1" class="method get">GET</a><code class="uri">/candidatetests/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidatetests/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">raw</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">43</span></span>,
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test29215"</span></span>,
+    "<span class="hljs-attribute">id_candidate</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+    "<span class="hljs-attribute">started</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:39:52+0200"</span></span>,
+    "<span class="hljs-attribute">submitted</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:40:10+0200"</span></span>,
+    "<span class="hljs-attribute">is_taken</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">tests</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test29215"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Examen MPWAR"</span></span>,
+    "<span class="hljs-attribute">instructions</span>": <span class="hljs-value"><span class="hljs-string">"Lea las instrucciones de cada pregunta con cuidado y luego compruebe si las ha entendido correctamente. Cualquier error cometido al marcar su respuesta haran que se le califique como incorrecta."</span></span>,
+    "<span class="hljs-attribute">duration</span>": <span class="hljs-value"><span class="hljs-number">60</span></span>,
+    "<span class="hljs-attribute">extra_time</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+    "<span class="hljs-attribute">id_user</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">7</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Andreina "</span></span>,
+      "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Loriente"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"andreina.loriente@gmail.com"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$38rTwbIRnvFoROck5RUG8OKhuUDgZ/N9mVE56lTKSyqAhX8Q5Pi4m"</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-29T19:25:20+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">is_autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T17:24:46+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">candidates</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+    "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-3" class="resource"><h3 class="resource-heading">Candidatos asociados a examen <a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-3" class="permalink">&nbsp;&para;</a></h3><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-put" class="method put">PUT</a><code class="uri">/candidatetests/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidatetests/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
+  "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test4940"</span></span>,
+  "<span class="hljs-attribute">id_candidate</span>": <span class="hljs-value"><span class="hljs-number">3</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-4" class="resource"><h3 class="resource-heading">Candidatos asociados a examen <a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-4" class="permalink">&nbsp;&para;</a></h3><div id="candidato-asociado-a-examen-candidatos-asociados-a-examen-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#candidato-asociado-a-examen-candidatos-asociados-a-examen-delete" class="method delete">DELETE</a><code class="uri">/candidatetests/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidatetests/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="respuestas-del-candidato" class="resource-group"><h2 class="group-heading">Respuestas del candidato <a href="#respuestas-del-candidato" class="permalink">&para;</a></h2><div id="respuestas-del-candidato-resultados-de-usuario" class="resource"><h3 class="resource-heading">Resultados de usuario <a href="#respuestas-del-candidato-resultados-de-usuario" class="permalink">&nbsp;&para;</a></h3><div id="respuestas-del-candidato-resultados-de-usuario-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#respuestas-del-candidato-resultados-de-usuario-post" class="method post">POST</a><code class="uri">/candidate_question_answer</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidate_question_answer</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">candidate_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">proposedAnswer_id</span>": <span class="hljs-value"><span class="hljs-number">102</span></span>,
+    "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"respuesta"</span></span>,
+    "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">15</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="respuestas-del-candidato-resultados-de-usuario-1" class="resource"><h3 class="resource-heading">Resultados de usuario <a href="#respuestas-del-candidato-resultados-de-usuario-1" class="permalink">&nbsp;&para;</a></h3><div id="respuestas-del-candidato-resultados-de-usuario-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#respuestas-del-candidato-resultados-de-usuario-get" class="method get">GET</a><code class="uri">/candidate_question_answer</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidate_question_answer</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">40</span></span>,
+    "<span class="hljs-attribute">id_candidate</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+      "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">id_proposed_answer</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">153</span></span>,
+      "<span class="hljs-attribute">question</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">59</span></span>,
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+          "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+          "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+        </span>}</span>,
+        "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test29215"</span></span>,
+        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Que significado tienen las siglas MPWAR"</span></span>,
+        "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T17:29:40+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"Máster en Programación Web de Alto Rendimiento"</span></span>,
+      "<span class="hljs-attribute">is_correct</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+      "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">"Resource id #422"</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T17:29:42+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"Máster en Programación Web de Alto Rendimiento"</span></span>,
+    "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">"Resource id #321"</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:40:12+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="respuestas-del-candidato-resultados-de-usuario-2" class="resource"><h3 class="resource-heading">Resultados de usuario <a href="#respuestas-del-candidato-resultados-de-usuario-2" class="permalink">&nbsp;&para;</a></h3><div id="respuestas-del-candidato-resultados-de-usuario-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#respuestas-del-candidato-resultados-de-usuario-get-1" class="method get">GET</a><code class="uri">/candidate_question_answer/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidate_question_answer/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">40</span></span>,
+  "<span class="hljs-attribute">id_candidate</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">14</span></span>,
+    "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"daniel.rodriguez.d@gmail.com"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"1426936289"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$Jn4XqKKYS/00HeBOZQKwBe.0xB.UF0UizdOkUJUJSRdRaipbpTlK2"</span></span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:48+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">id_proposed_answer</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">153</span></span>,
+    "<span class="hljs-attribute">question</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">59</span></span>,
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"seleccion simple"</span></span>,
+        "<span class="hljs-attribute">autocorrect</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+        "<span class="hljs-attribute">registration_date</span>": <span class="hljs-value"><span class="hljs-string">"2015-08-25T22:47:19+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">id_test</span>": <span class="hljs-value"><span class="hljs-string">"test29215"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Que significado tienen las siglas MPWAR"</span></span>,
+      "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T17:29:40+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"Máster en Programación Web de Alto Rendimiento"</span></span>,
+    "<span class="hljs-attribute">is_correct</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+    "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">"Resource id #422"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T17:29:42+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"Máster en Programación Web de Alto Rendimiento"</span></span>,
+  "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">"Resource id #321"</span></span>,
+  "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:40:12+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="respuestas-del-candidato-resultados-de-usuario-3" class="resource"><h3 class="resource-heading">Resultados de usuario <a href="#respuestas-del-candidato-resultados-de-usuario-3" class="permalink">&nbsp;&para;</a></h3><div id="respuestas-del-candidato-resultados-de-usuario-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#respuestas-del-candidato-resultados-de-usuario-put" class="method put">PUT</a><code class="uri">/candidate_question_answer/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidate_question_answer/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">candidate_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">proposedAnswer_id</span>": <span class="hljs-value"><span class="hljs-number">102</span></span>,
+    "<span class="hljs-attribute">answer</span>": <span class="hljs-value"><span class="hljs-string">"respuesta"</span></span>,
+    "<span class="hljs-attribute">file</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+    "<span class="hljs-attribute">score</span>": <span class="hljs-value"><span class="hljs-number">15</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="respuestas-del-candidato-resultados-de-usuario-4" class="resource"><h3 class="resource-heading">Resultados de usuario <a href="#respuestas-del-candidato-resultados-de-usuario-4" class="permalink">&nbsp;&para;</a></h3><div id="respuestas-del-candidato-resultados-de-usuario-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#respuestas-del-candidato-resultados-de-usuario-delete" class="method delete">DELETE</a><code class="uri">/candidate_question_answer/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidate_question_answer/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="rol" class="resource-group"><h2 class="group-heading">Rol <a href="#rol" class="permalink">&para;</a></h2><div id="rol-rol" class="resource"><h3 class="resource-heading">Rol <a href="#rol-rol" class="permalink">&nbsp;&para;</a></h3><div id="rol-rol-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#rol-rol-post" class="method post">POST</a><code class="uri">/rol</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/rol</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Nuevo rol"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="rol-rol-1" class="resource"><h3 class="resource-heading">Rol <a href="#rol-rol-1" class="permalink">&nbsp;&para;</a></h3><div id="rol-rol-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#rol-rol-get" class="method get">GET</a><code class="uri">/rol</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/rol</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+  </span>},
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Reviewer"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="rol-rol-2" class="resource"><h3 class="resource-heading">Rol <a href="#rol-rol-2" class="permalink">&nbsp;&para;</a></h3><div id="rol-rol-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#rol-rol-get-1" class="method get">GET</a><code class="uri">/rol/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/rol/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="rol-rol-3" class="resource"><h3 class="resource-heading">Rol <a href="#rol-rol-3" class="permalink">&nbsp;&para;</a></h3><div id="rol-rol-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#rol-rol-put" class="method put">PUT</a><code class="uri">/rol/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/rol/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="rol-rol-4" class="resource"><h3 class="resource-heading">Rol <a href="#rol-rol-4" class="permalink">&nbsp;&para;</a></h3><div id="rol-rol-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#rol-rol-delete" class="method delete">DELETE</a><code class="uri">/rol/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/rol/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="compañia" class="resource-group"><h2 class="group-heading">Compañia <a href="#compañia" class="permalink">&para;</a></h2><div id="compañia-compañia" class="resource"><h3 class="resource-heading">Compañia <a href="#compañia-compañia" class="permalink">&nbsp;&para;</a></h3><div id="compañia-compañia-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#compañia-compañia-post" class="method post">POST</a><code class="uri">/company</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/company</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Nueva compañia"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="compañia-compañia-1" class="resource"><h3 class="resource-heading">Compañia <a href="#compañia-compañia-1" class="permalink">&nbsp;&para;</a></h3><div id="compañia-compañia-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#compañia-compañia-get" class="method get">GET</a><code class="uri">/company</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/company</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="compañia-compañia-2" class="resource"><h3 class="resource-heading">Compañia <a href="#compañia-compañia-2" class="permalink">&nbsp;&para;</a></h3><div id="compañia-compañia-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#compañia-compañia-get-1" class="method get">GET</a><code class="uri">/company/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/company/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="compañia-compañia-3" class="resource"><h3 class="resource-heading">Compañia <a href="#compañia-compañia-3" class="permalink">&nbsp;&para;</a></h3><div id="compañia-compañia-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#compañia-compañia-put" class="method put">PUT</a><code class="uri">/company/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/company/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Nueva compañia"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="compañia-compañia-4" class="resource"><h3 class="resource-heading">Compañia <a href="#compañia-compañia-4" class="permalink">&nbsp;&para;</a></h3><div id="compañia-compañia-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#compañia-compañia-delete" class="method delete">DELETE</a><code class="uri">/company/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/company/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="usuario" class="resource-group"><h2 class="group-heading">Usuario <a href="#usuario" class="permalink">&para;</a></h2><div id="usuario-usuario" class="resource"><h3 class="resource-heading">Usuario <a href="#usuario-usuario" class="permalink">&nbsp;&para;</a></h3><div id="usuario-usuario-post" class="action post"><h4 class="action-heading"><div class="name">Crear nuevo</div><a href="#usuario-usuario-post" class="method post">POST</a><code class="uri">/user</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/user</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+  "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Juan"</span></span>,
+  "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Perez"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"juanperez@gmail.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"secure password here"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="usuario-usuario-1" class="resource"><h3 class="resource-heading">Usuario <a href="#usuario-usuario-1" class="permalink">&nbsp;&para;</a></h3><div id="usuario-usuario-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#usuario-usuario-get" class="method get">GET</a><code class="uri">/user</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/user</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Juan"</span></span>,
+    "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Perez"</span></span>,
+    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"juanperez@gmail.com"</span></span>,
+    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$UEgJgPpu8fyWS12VrYQwQ.kzklQpNJ0ITB8cqgcdqL9Vp01hzV.m2"</span></span>,
+    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="usuario-usuario-2" class="resource"><h3 class="resource-heading">Usuario <a href="#usuario-usuario-2" class="permalink">&nbsp;&para;</a></h3><div id="usuario-usuario-get-1" class="action get"><h4 class="action-heading"><div class="name">Obtener detalle</div><a href="#usuario-usuario-get-1" class="method get">GET</a><code class="uri">/user/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/user/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Manager"</span></span>,
+    "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+  </span>}</span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Juan"</span></span>,
+  "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Perez"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"juanperez@gmail.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$UEgJgPpu8fyWS12VrYQwQ.kzklQpNJ0ITB8cqgcdqL9Vp01hzV.m2"</span></span>,
+  "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+  "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="usuario-usuario-3" class="resource"><h3 class="resource-heading">Usuario <a href="#usuario-usuario-3" class="permalink">&nbsp;&para;</a></h3><div id="usuario-usuario-put" class="action put"><h4 class="action-heading"><div class="name">Modificar</div><a href="#usuario-usuario-put" class="method put">PUT</a><code class="uri">/user/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/user/id</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+  "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Juan"</span></span>,
+  "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"Perez"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"juanperez@gmail.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"secure password here"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="usuario-usuario-4" class="resource"><h3 class="resource-heading">Usuario <a href="#usuario-usuario-4" class="permalink">&nbsp;&para;</a></h3><div id="usuario-usuario-delete" class="action delete"><h4 class="action-heading"><div class="name">Eliminar</div><a href="#usuario-usuario-delete" class="method delete">DELETE</a><code class="uri">/user/id</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/user/id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"OK"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="rol-por-usuario" class="resource-group"><h2 class="group-heading">Rol por usuario <a href="#rol-por-usuario" class="permalink">&para;</a></h2><div id="rol-por-usuario-rol-por-usuario" class="resource"><h3 class="resource-heading">Rol por usuario <a href="#rol-por-usuario-rol-por-usuario" class="permalink">&nbsp;&para;</a></h3><div id="rol-por-usuario-rol-por-usuario-get" class="action get"><h4 class="action-heading"><div class="name">Obtener todos</div><a href="#rol-por-usuario-rol-por-usuario-get" class="method get">GET</a><code class="uri">/rol_permit</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/rol_permit</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>[
+  {
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">id_rol</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">id_permit</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+  </span>}
+]</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="login" class="resource-group"><h2 class="group-heading">Login <a href="#login" class="permalink">&para;</a></h2><div id="login-login-usuario" class="resource"><h3 class="resource-heading">Login Usuario <a href="#login-login-usuario" class="permalink">&nbsp;&para;</a></h3><div id="login-login-usuario-post" class="action post"><h4 class="action-heading"><div class="name">Iniciar sesión</div><a href="#login-login-usuario-post" class="method post">POST</a><code class="uri">/user/login</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/user/login</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"p@p.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"password31"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">user</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Company For Test"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">rol_id</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Reviewer"</span></span>,
+        "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-04-11T22:03:21+0200"</span>
+      </span>}</span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prueba"</span></span>,
+      "<span class="hljs-attribute">lastname</span>": <span class="hljs-value"><span class="hljs-string">"prueba"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"p@p.com"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$WEaNkeBIX./qldoL8/zU7OCl6YflcKhi7U/MG5SDkZlvDf82huQei"</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-06-26T13:39:44+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">key</span>": <span class="hljs-value"><span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIiwianRpIjoiNSJ9.eyJpc3MiOiJodHRwOlwvXC9wb3J0YWwuZGV2IiwiYXVkIjoiaHR0cDpcL1wvcG9ydGFsLm9yZ1wvIiwianRpIjoiNSIsImlhdCI6MTQ2NzU0MTUwNSwibmJmIjoxNDY3NTQxNTA2LCJleHAiOjE0Njc2Mjc5MDUsInVpZCI6IjFkNThkOTQ3YjU2NjJkMGIifQ.c270342794f57937f3b83b10d2e1d4747573b135ea2e56f44122024cf355b6b2"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="login-login-candidato" class="resource"><h3 class="resource-heading">Login Candidato <a href="#login-login-candidato" class="permalink">&nbsp;&para;</a></h3><div id="login-login-candidato-post" class="action post"><h4 class="action-heading"><div class="name">Iniciar sesión</div><a href="#login-login-candidato-post" class="method post">POST</a><code class="uri">/candidato/login</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/candidato/login</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"0660332788"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"w9wHi8edFv"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-number">200</span></span>,
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">user</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+      "<span class="hljs-attribute">company_id</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"ninina31@gmail.com"</span></span>,
+      "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"0660332788"</span></span>,
+      "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"$2y$10$LD5B.o6c3L4bopcXomnp4uR87npq8qZeaScFbmw0UbWxq6efBGMQ."</span></span>,
+      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value"><span class="hljs-string">"2016-07-02T20:38:51+0200"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">key</span>": <span class="hljs-value"><span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIiwianRpIjoiMTUifQ.eyJpc3MiOiJodHRwOlwvXC9wb3J0YWwuZGV2IiwiYXVkIjoiaHR0cDpcL1wvcG9ydGFsLm9yZ1wvIiwianRpIjoiMTUiLCJpYXQiOjE0Njc1NDIxMTUsIm5iZiI6MTQ2NzU0MjExNiwiZXhwIjoxNDY3NjI4NTE1LCJ1aWQiOiIzYTI4YmZmOTI2ZDBmODY1In0.9b8e4898ecfd41825f797617b5c2bcfd4a7fcb2436e090bab63489becb2adac4"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 03 Jul 2016</p><script>/* eslint-env browser */
+/* eslint quotes: [2, "single"] */
+'use strict';
+
+/*
+  Determine if a string ends with another string.
+*/
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+/*
+  Get a list of direct child elements by class name.
+*/
+function childrenByClass(element, name) {
+  var filtered = [];
+
+  for (var i = 0; i < element.children.length; i++) {
+    var child = element.children[i];
+    var classNames = child.className.split(' ');
+    if (classNames.indexOf(name) !== -1) {
+      filtered.push(child);
+    }
+  }
+
+  return filtered;
+}
+
+/*
+  Get an array [width, height] of the window.
+*/
+function getWindowDimensions() {
+  var w = window,
+      d = document,
+      e = d.documentElement,
+      g = d.body,
+      x = w.innerWidth || e.clientWidth || g.clientWidth,
+      y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+  return [x, y];
+}
+
+/*
+  Collapse or show a request/response example.
+*/
+function toggleCollapseButton(event) {
+    var button = event.target.parentNode;
+    var content = button.parentNode.nextSibling;
+    var inner = content.children[0];
+
+    if (button.className.indexOf('collapse-button') === -1) {
+      // Clicked without hitting the right element?
+      return;
+    }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        // Currently showing, so let's hide it
+        button.className = 'collapse-button';
+        content.style.maxHeight = '0px';
+    } else {
+        // Currently hidden, so let's show it
+        button.className = 'collapse-button show';
+        content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+    }
+}
+
+function toggleTabButton(event) {
+    var i, index;
+    var button = event.target;
+
+    // Get index of the current button.
+    var buttons = childrenByClass(button.parentNode, 'tab-button');
+    for (i = 0; i < buttons.length; i++) {
+        if (buttons[i] === button) {
+            index = i;
+            button.className = 'tab-button active';
+        } else {
+            buttons[i].className = 'tab-button';
+        }
+    }
+
+    // Hide other tabs and show this one.
+    var tabs = childrenByClass(button.parentNode.parentNode, 'tab');
+    for (i = 0; i < tabs.length; i++) {
+        if (i === index) {
+            tabs[i].style.display = 'block';
+        } else {
+            tabs[i].style.display = 'none';
+        }
+    }
+}
+
+/*
+  Collapse or show a navigation menu. It will not be hidden unless it
+  is currently selected or `force` has been passed.
+*/
+function toggleCollapseNav(event, force) {
+    var heading = event.target.parentNode;
+    var content = heading.nextSibling;
+    var inner = content.children[0];
+
+    if (heading.className.indexOf('heading') === -1) {
+      // Clicked without hitting the right element?
+      return;
+    }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      // Currently showing, so let's hide it, but only if this nav item
+      // is already selected. This prevents newly selected items from
+      // collapsing in an annoying fashion.
+      if (force || window.location.hash && endsWith(event.target.href, window.location.hash)) {
+        content.style.maxHeight = '0px';
+      }
+    } else {
+      // Currently hidden, so let's show it
+      content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+    }
+}
+
+/*
+  Refresh the page after a live update from the server. This only
+  works in live preview mode (using the `--server` parameter).
+*/
+function refresh(body) {
+    document.querySelector('body').className = 'preload';
+    document.body.innerHTML = body;
+
+    // Re-initialize the page
+    init();
+    autoCollapse();
+
+    document.querySelector('body').className = '';
+}
+
+/*
+  Determine which navigation items should be auto-collapsed to show as many
+  as possible on the screen, based on the current window height. This also
+  collapses them.
+*/
+function autoCollapse() {
+  var windowHeight = getWindowDimensions()[1];
+  var itemsHeight = 64; /* Account for some padding */
+  var itemsArray = Array.prototype.slice.call(
+    document.querySelectorAll('nav .resource-group .heading'));
+
+  // Get the total height of the navigation items
+  itemsArray.forEach(function (item) {
+    itemsHeight += item.parentNode.offsetHeight;
+  });
+
+  // Should we auto-collapse any nav items? Try to find the smallest item
+  // that can be collapsed to show all items on the screen. If not possible,
+  // then collapse the largest item and do it again. First, sort the items
+  // by height from smallest to largest.
+  var sortedItems = itemsArray.sort(function (a, b) {
+    return a.parentNode.offsetHeight - b.parentNode.offsetHeight;
+  });
+
+  while (sortedItems.length && itemsHeight > windowHeight) {
+    for (var i = 0; i < sortedItems.length; i++) {
+      // Will collapsing this item help?
+      var itemHeight = sortedItems[i].nextSibling.offsetHeight;
+      if ((itemsHeight - itemHeight <= windowHeight) || i === sortedItems.length - 1) {
+        // It will, so let's collapse it, remove its content height from
+        // our total and then remove it from our list of candidates
+        // that can be collapsed.
+        itemsHeight -= itemHeight;
+        toggleCollapseNav({target: sortedItems[i].children[0]}, true);
+        sortedItems.splice(i, 1);
+        break;
+      }
+    }
+  }
+}
+
+/*
+  Initialize the interactive functionality of the page.
+*/
+function init() {
+    var i, j;
+
+    // Make collapse buttons clickable
+    var buttons = document.querySelectorAll('.collapse-button');
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = toggleCollapseButton;
+
+        // Show by default? Then toggle now.
+        if (buttons[i].className.indexOf('show') !== -1) {
+            toggleCollapseButton({target: buttons[i].children[0]});
+        }
+    }
+
+    var responseCodes = document.querySelectorAll('.example-names');
+    for (i = 0; i < responseCodes.length; i++) {
+        var tabButtons = childrenByClass(responseCodes[i], 'tab-button');
+        for (j = 0; j < tabButtons.length; j++) {
+            tabButtons[j].onclick = toggleTabButton;
+
+            // Show by default?
+            if (j === 0) {
+                toggleTabButton({target: tabButtons[j]});
+            }
+        }
+    }
+
+    // Make nav items clickable to collapse/expand their content.
+    var navItems = document.querySelectorAll('nav .resource-group .heading');
+    for (i = 0; i < navItems.length; i++) {
+        navItems[i].onclick = toggleCollapseNav;
+
+        // Show all by default
+        toggleCollapseNav({target: navItems[i].children[0]});
+    }
+}
+
+// Initial call to set up buttons
+init();
+
+window.onload = function () {
+    autoCollapse();
+    // Remove the `preload` class to enable animations
+    document.querySelector('body').className = '';
+};
+</script></body></html>
